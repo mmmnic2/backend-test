@@ -108,14 +108,14 @@ public class BookServiceImpl implements BookService {
      * @param pageable the pagination information (page, size, sorting).
      * @return a map containing the total count of books from the repository and the list of books for the current page.
      *         The map contains:
-     *         - "totalCount" (total number of books)
+     *         - "totalCount" (total number of page)
      *         - "data" (list of books for the current page)
      */
     @Override
     public Map<String, Object> findAllWithPagination(Pageable pageable) {
         Page<Book> data = bookRepository.findAll(pageable);
         Map<String, Object> res = new HashMap<>();
-        res.put("totalCount", data.getTotalElements());
+        res.put("totalCount", data.getNumberOfElements());
         res.put("data", data.getContent());
         return res;
     }
