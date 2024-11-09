@@ -18,7 +18,7 @@ Before you can run this application, you will need to have the following install
 ```javascript
 /**
  * @route POST /api/v1/books
- * @description create and update book. If requestBody has field bookId then api will be update.
+ * @description create and update the book. If requestBody has field bookId then API will be updated.
  * @body {bookId , title, author, publishedDate, isbn, price}
  * @access Public
  * /
@@ -28,6 +28,14 @@ Before you can run this application, you will need to have the following install
 /**
  * @route GET /api/v1/books
  * @description get all books.
+ * @access Public
+ * /
+```
+```javascript
+/**
+ * @route GET /api/v1/books-pagination
+ * @description Retrieves a paginated list of books.
+ * @param page, size
  * @access Public
  * /
 ```
@@ -50,4 +58,4 @@ Before you can run this application, you will need to have the following install
  * /
 ```
 
-###  Completion time: 5h
+###  Completion time: 8h
