@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-@RestController("/api/v1/")
+@RestController
+@RequestMapping("/api/v1/")
 @RequiredArgsConstructor
 public class BookController {
     private final BookService bookService;
