@@ -32,8 +32,8 @@ public class BookUpsertRequest implements BookValidation {
      * If data is valid, it will be converted to Date at convertStringToDate in {@link com.backendtest.project.service.Impl.BookServiceImpl}.
      */
     @NotNull
-    @Pattern(regexp = "^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/\\d{4}$", message = "Published date must be in format MM/dd/yyyy")
-    @JsonFormat(pattern = "MM/dd/yyyy")
+    @Pattern(regexp = "^(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])-\\d{4}$", message = "Published date must be in format MM-dd-yyyy")
+    @JsonFormat(pattern = "MM-dd-yyyy")
     private String publishedDate;
 
     private String isbn;

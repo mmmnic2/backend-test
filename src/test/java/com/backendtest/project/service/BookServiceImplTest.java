@@ -14,6 +14,7 @@ import org.mockito.*;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,7 +42,7 @@ public class BookServiceImplTest {
         bookUpsertRequest.setAuthor("Author Test");
         bookUpsertRequest.setIsbn("123-456-789-1");
         bookUpsertRequest.setPrice(BigDecimal.valueOf(25.5));
-        bookUpsertRequest.setPublishedDate("12/12/2022");
+        bookUpsertRequest.setPublishedDate("12-12-2022");
 
         // Create sample book in database
         existingBook = new Book();
@@ -50,7 +51,7 @@ public class BookServiceImplTest {
         existingBook.setAuthor("Author Test");
         existingBook.setIsbn("123-456-789-1");
         existingBook.setPrice(BigDecimal.valueOf(25.5));
-        existingBook.setPublishedDate(new java.util.Date());
+        existingBook.setPublishedDate(LocalDate.now());
     }
 
     @Test
@@ -94,7 +95,7 @@ public class BookServiceImplTest {
     void testCreateAndUpdateBook_whenPublishedDateIsInTheFuture_shouldThrowInvalidDateException() throws ParseException {
         // Arrange
         when(bookRepository.findById(1L)).thenReturn(Optional.of(existingBook));
-        bookUpsertRequest.setPublishedDate("12/12/2025");
+        bookUpsertRequest.setPublishedDate("12-12-2025");
 
         // Act and Assert
         InvalidDateException exception = assertThrows(InvalidDateException.class, () -> {

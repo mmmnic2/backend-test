@@ -27,6 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.*;
 
 @WebMvcTest(controllers = BookController.class)
@@ -55,7 +56,7 @@ public class BookControllerTest {
         bookUpsertRequest.setAuthor("Author Test");
         bookUpsertRequest.setIsbn("123-456-789-1");
         bookUpsertRequest.setPrice(BigDecimal.valueOf(25.5));
-        bookUpsertRequest.setPublishedDate("12/12/2022");
+        bookUpsertRequest.setPublishedDate("12-12-2022");
 
         // Create sample book in database
         book = new Book();
@@ -64,7 +65,7 @@ public class BookControllerTest {
         book.setAuthor("Author Test");
         book.setIsbn("123-456-789-1");
         book.setPrice(BigDecimal.valueOf(25.5));
-        book.setPublishedDate(new java.util.Date());
+        book.setPublishedDate(LocalDate.now());
     }
 
     @Test
@@ -125,7 +126,6 @@ public class BookControllerTest {
     void testDeleteBookById_Success() throws Exception {
         Mockito.doNothing().when(bookService).deleteById(1L);
 
-        // Thực hiện yêu cầu DELETE
         mockMvc.perform(delete("/api/v1/books/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.statusCode").value(200))
@@ -177,7 +177,7 @@ public class BookControllerTest {
         mockMvc.perform(get("/api/v1/books-pagination")
                         .param("page", "0")
                         .param("size", "5"))
-                .andExpect(status().isOk())  // Kiểm tra mã trạng thái HTTP
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.statusCode").value(200))
                 .andExpect(jsonPath("$.message").value("success"))
                 .andExpect(jsonPath("$.result.content[0].title").value("Book 1"))
@@ -195,7 +195,7 @@ public class BookControllerTest {
         bookUpsertRequest.setBookId(1L);
         bookUpsertRequest.setTitle("Book1");
         bookUpsertRequest.setAuthor("AuthorA");
-        bookUpsertRequest.setPublishedDate("10/01/2023");
+        bookUpsertRequest.setPublishedDate("10-01-2023");
         bookUpsertRequest.setIsbn("123-456-789-1");
         bookUpsertRequest.setPrice(BigDecimal.valueOf(29.99));
 
@@ -220,7 +220,7 @@ public class BookControllerTest {
         bookUpsertRequest.setBookId(1L);
         bookUpsertRequest.setTitle("Book1");
         bookUpsertRequest.setAuthor("");
-        bookUpsertRequest.setPublishedDate("10/01/2023");
+        bookUpsertRequest.setPublishedDate("10-01-2023");
         bookUpsertRequest.setIsbn("123-456-789-1");
         bookUpsertRequest.setPrice(BigDecimal.valueOf(29.99));
 

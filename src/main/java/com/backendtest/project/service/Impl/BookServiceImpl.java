@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -21,15 +23,14 @@ import java.util.*;
 public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     /**
-     * Converts a string in "MM/dd/yyyy" format to a {@link Date} object.
+     * Converts a string in "MM-dd-yyyy" format to a {@link LocalDate} object.
      *
-     * @param dateStr the date string in "MM/dd/yyyy" format.
-     * @return the corresponding {@link Date} object.
-     * @throws ParseException if the date string is invalid or cannot be parsed.
+     * @param dateStr the date string in "MM-dd-yyyy" format.
+     * @return the corresponding {@link LocalDate} object.
      */
-    private Date convertStringToDate(String dateStr) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-        return sdf.parse(dateStr);
+    private LocalDate convertStringToDate(String dateStr) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+        return LocalDate.parse(dateStr, formatter);
     }
 
     /**
@@ -38,9 +39,9 @@ public class BookServiceImpl implements BookService {
      * @param date the date to check.
      * @return true if the date is in the past or today, false if it is in the future.
      */
-    private boolean isDateInThePastOrPresent(Date date) {
-            Date currentDate = new Date();
-            return !date.after(currentDate);
+    private boolean isDateInThePastOrPresent(LocalDate date) {
+        LocalDate currentDate = LocalDate.now();
+        return date.isBefore(currentDate);
     }
 
     /**

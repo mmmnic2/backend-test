@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -29,7 +30,8 @@ public class Book implements BookValidation {
     private String author;
     @NotNull
     @PastOrPresent(message = "Published date must be in the past or present")
-    private Date publishedDate;
+    private LocalDate publishedDate;
+    @Column(unique = true)
     private String isbn;
     @Column(scale = 2)
     private BigDecimal price;
