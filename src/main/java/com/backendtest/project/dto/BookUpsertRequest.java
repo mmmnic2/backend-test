@@ -40,6 +40,4 @@ public class BookUpsertRequest implements BookValidation {
 
     private BigDecimal price;
 
-    public BookUpsertRequest(String title, String author, String s, BigDecimal bigDecimal) {
-    }
 }
