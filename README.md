@@ -17,7 +17,7 @@ Before you can run this application, you will need to have the following install
 
 ```javascript
 /**
- * @route POST /books
+ * @route POST /api/v1/books
  * @description create and update book. If requestBody has field bookId then api will be update.
  * @body {bookId , title, author, publishedDate, isbn, price}
  * @access Public
