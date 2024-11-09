@@ -39,4 +39,7 @@ public class BookUpsertRequest implements BookValidation {
     private String isbn;
 
     private BigDecimal price;
+
+    public BookUpsertRequest(String title, String author, String s, BigDecimal bigDecimal) {
+    }
 }

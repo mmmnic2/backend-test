@@ -2,6 +2,7 @@ package com.backendtest.project.exception;
 
 import com.backendtest.project.dto.ResponseDTO;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -13,25 +14,30 @@ import java.text.ParseException;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
-    public ResponseDTO handleNotFoundException(NotFoundException ex) {
-        return new ResponseDTO(HttpStatus.NOT_FOUND.value(), ex.getMessage(), null);
+    public ResponseEntity<ResponseDTO> handleNotFoundException(NotFoundException ex) {
+        ResponseDTO responseDTO = new ResponseDTO(HttpStatus.NOT_FOUND.value(), ex.getMessage(), null);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseDTO);
     }
     @ExceptionHandler(AlreadyExistException.class)
-    public ResponseDTO handleAlreadyExistException(AlreadyExistException ex) {
-        return new ResponseDTO(HttpStatus.CONFLICT.value(), ex.getMessage(), null);
+    public ResponseEntity<ResponseDTO> handleAlreadyExistException(AlreadyExistException ex) {
+        ResponseDTO responseDTO = new ResponseDTO(HttpStatus.CONFLICT.value(), ex.getMessage(), null);
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(responseDTO);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseDTO handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
-        return new ResponseDTO(HttpStatus.BAD_REQUEST.value(), "Invalid JSON format " + e.getLocalizedMessage(), null);
+    public ResponseEntity<ResponseDTO> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
+        ResponseDTO responseDTO = new ResponseDTO(HttpStatus.BAD_REQUEST.value(), "Invalid JSON format " + ex.getLocalizedMessage(), null);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
     }
     @ExceptionHandler(ParseException.class)
-    public ResponseDTO handleParseException(ParseException ex) {
-        return new ResponseDTO(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), null);
+    public ResponseEntity<ResponseDTO> handleParseException(ParseException ex) {
+        ResponseDTO responseDTO = new ResponseDTO(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), null);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
     }
     @ExceptionHandler(InvalidDateException.class)
-    public ResponseDTO handleInvalidDateException(InvalidDateException ex) {
-        return new ResponseDTO(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), null);
+    public ResponseEntity<ResponseDTO> handleInvalidDateException(InvalidDateException ex) {
+        ResponseDTO responseDTO = new ResponseDTO(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), null);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
     }
 }

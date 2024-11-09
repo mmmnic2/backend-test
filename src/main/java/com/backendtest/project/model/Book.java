@@ -34,4 +34,10 @@ public class Book implements BookValidation {
     @Column(scale = 2)
     private BigDecimal price;
 
+    public Book(long id, String title, String author, String isbn, BigDecimal bigDecimal) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.price = bigDecimal;
+    }
 }

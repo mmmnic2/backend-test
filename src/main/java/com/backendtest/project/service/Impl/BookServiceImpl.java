@@ -65,7 +65,7 @@ public class BookServiceImpl implements BookService {
         }
         // Find and check existing ISBN if true throw error
         Optional<Book> foundBook = bookRepository.findByIsbn(bookUpsertRequest.getIsbn());
-        if (foundBook.isPresent()) throw new AlreadyExistException("Book with ISBN has already existed.");
+        if (foundBook.isPresent() && !Objects.equals(savedBook.getId(), foundBook.get().getId())) throw new AlreadyExistException("Book with ISBN has already existed.");
         savedBook.setAuthor(bookUpsertRequest.getAuthor());
         savedBook.setIsbn(bookUpsertRequest.getIsbn());
         savedBook.setPrice(bookUpsertRequest.getPrice());
