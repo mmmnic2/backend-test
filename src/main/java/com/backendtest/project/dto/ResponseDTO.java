@@ -6,6 +6,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * A Data Transfer Object (DTO) for standardizing API responses.
+ * This class is used to structure the response data, including a status flag, a message, and the actual result.
+ *
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter

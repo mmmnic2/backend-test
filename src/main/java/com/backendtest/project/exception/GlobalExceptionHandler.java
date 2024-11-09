@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.text.ParseException;
+
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -23,5 +25,13 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseDTO handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         return new ResponseDTO(HttpStatus.BAD_REQUEST.value(), "Invalid JSON format " + e.getLocalizedMessage(), null);
+    }
+    @ExceptionHandler(ParseException.class)
+    public ResponseDTO handleParseException(ParseException ex) {
+        return new ResponseDTO(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), null);
+    }
+    @ExceptionHandler(InvalidDateException.class)
+    public ResponseDTO handleInvalidDateException(InvalidDateException ex) {
+        return new ResponseDTO(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), null);
     }
 }

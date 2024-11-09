@@ -1,6 +1,6 @@
 package com.backendtest.project.controller;
 
-import com.backendtest.project.dto.CreateBookRequest;
+import com.backendtest.project.dto.BookUpsertRequest;
 import com.backendtest.project.dto.ResponseDTO;
 import com.backendtest.project.model.Book;
 import com.backendtest.project.service.BookService;
@@ -14,14 +14,28 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.Map;
 
+/**
+ * REST controller for handling book-related operations.
+ * This controller includes endpoints for creating, retrieving, updating, and deleting books.
+ */
 @RestController
 @RequestMapping("/api/v1/")
 @RequiredArgsConstructor
 public class BookController {
     private final BookService bookService;
 
+    /**
+     * Retrieves a paginated list of books.
+     *
+     * - The `page` parameter specifies the page number (0-based index).
+     * - The `size` parameter specifies the number of items per page.
+     *
+     * If `page` or `size` parameters are not provided, they default to 0 and 5, respectively.
+     * The method uses the `PageRequest.of(page, size)` to create a Pageable instance for pagination.
+     */
     @GetMapping("/books-pagination")
     public ResponseDTO getAll(@RequestParam(required = false, defaultValue = "0") int page,
                               @RequestParam(required = false, defaultValue = "5") int size) {
@@ -31,10 +45,10 @@ public class BookController {
     }
 
     @PostMapping("/books")
-    public ResponseDTO createAndUpdateBook(@RequestBody @Valid CreateBookRequest createBookRequest,
-                                            BindingResult bindingResult)  {
+    public ResponseDTO createAndUpdateBook(@RequestBody @Valid BookUpsertRequest bookUpsertRequest,
+                                            BindingResult bindingResult) throws ParseException {
         if (bindingResult.hasErrors()) return new ResponseDTO(HttpStatus.BAD_REQUEST.value(), bindingResult.getAllErrors().get(0).getDefaultMessage(), null);
-        Book response = bookService.createAndUpdateBook(createBookRequest);
+        Book response = bookService.createAndUpdateBook(bookUpsertRequest);
         if (response != null) {
             return new ResponseDTO(HttpStatus.OK.value(), "success", null);
         } else
