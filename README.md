@@ -26,7 +26,7 @@ Before you can run this application, you will need to have the following install
 
 ```javascript
 /**
- * @route GET /books
+ * @route GET /api/v1/books
  * @description get all books.
  * @access Public
  * /
@@ -34,7 +34,7 @@ Before you can run this application, you will need to have the following install
 
 ```javascript
 /**
- * @route GET /books/{id}
+ * @route GET /api/v1/books/{id}
  * @description get a book by id.
  * @PathVariable id
  * @access Public
@@ -43,7 +43,7 @@ Before you can run this application, you will need to have the following install
 
 ```javascript
 /**
- * @route DELETE /books/{id}
+ * @route DELETE /api/v1/books/{id}
  * @description delete a book by id.
  * @PathVariable id
  * @access Public
