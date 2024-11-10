@@ -13,6 +13,50 @@ Before you can run this application, you will need to have the following install
 - **Maven**: Version 3.8.x or higher
 - **Database**: MySQL
 
+## Steps to Set Up and Run the Application
+
+**1. Clone the repository**
+```javascript
+git clone https://github.com/mmmnic2/backend-test.git
+cd <project-directory>
+```
+
+**2. Configure Application Properties**
+In the src/main/resources/application.properties file, comment out the deployment database configuration and use the MySQL properties Local settings. Then, update the MySQL username and password fields with your credentials:
+```javascript
+# MySQL properties Local
+spring.jpa.hibernate.ddl-auto=create-drop
+spring.datasource.url=jdbc:mysql://localhost:3306/backend_test?createDatabaseIfNotExist=true
+spring.datasource.username=your_mysql_username
+spring.datasource.password=your_mysql_password
+spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
+
+# deploy database
+# spring.jpa.hibernate.ddl-auto=update
+# spring.datasource.url=${JDBC_DATABASE_URL:}?createDatabaseIfNotExist=true
+# spring.datasource.username=${JDBC_USERNAME:}
+# spring.datasource.password=${JDBC_PASSWORD:}
+# spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
+```
+
+**3. Build the Project**
+Run the following Maven command to build the project and download dependencies:
+```javascript
+mvn clean install
+```
+
+**4. Run the Application**
+Once the build is successful, start the Spring Boot application:
+```javascript
+mvn spring-boot:run
+```
+
+**5. Access the Application**
+By default, the application runs on port 8080. Open your browser and navigate to:
+```javascript
+http://localhost:8080
+```
+
 ## Endpoint APIs
 
 ```javascript
