@@ -21,7 +21,9 @@ git clone https://github.com/mmmnic2/backend-test.git
 cd <project-directory>
 ```
 
-**2. Configure Application Properties**: in the src/main/resources/application.properties file, comment out the deployment database configuration and use the MySQL properties Local settings. Then, update the MySQL username and password fields with your credentials:
+**2. Configure Application Properties** 
+
+In the src/main/resources/application.properties file, comment out the deployment database configuration and use the MySQL properties Local settings. Then, update the MySQL username and password fields with your credentials:
 ```javascript
 # MySQL properties Local
 spring.jpa.hibernate.ddl-auto=create-drop
@@ -38,17 +40,23 @@ spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
 # spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
 ```
 
-**3. Build the Project:**: run the following Maven command to build the project and download dependencies:
+**3. Build the Project** 
+
+Run the following Maven command to build the project and download dependencies:
 ```javascript
 mvn clean install
 ```
 
-**4. Run the Application**: once the build is successful, start the Spring Boot application:
+**4. Run the Application** 
+
+Once the build is successful, start the Spring Boot application:
 ```javascript
 mvn spring-boot:run
 ```
 
-**5. Access the Application**: the application runs on port 8080 by default. You can access Swagger UI to test and interact with the API using the following URL:
+**5. Access the Application** 
+
+The application runs on port 8080 by default. You can access Swagger UI to test and interact with the API using the following URL:
 - Swagger UI (for easily testing the API):
 ```javascript
 http://localhost:8080/swagger-ui/index.html#/
