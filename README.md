@@ -26,7 +26,7 @@ cd <project-directory>
 In the src/main/resources/application.properties file, comment out the deployment database configuration and use the MySQL properties Local settings. Then, update the MySQL username and password fields with your credentials:
 ```javascript
 # MySQL properties Local
-spring.jpa.hibernate.ddl-auto=create-drop
+spring.jpa.hibernate.ddl-auto=update
 spring.datasource.url=jdbc:mysql://localhost:3306/backend_test?createDatabaseIfNotExist=true
 spring.datasource.username=your_mysql_username
 spring.datasource.password=your_mysql_password
